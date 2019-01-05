@@ -4,6 +4,9 @@
 # Travis CI Build status
 [![Build Status](https://travis-ci.com/ardyflora/pytweetRogerInternet.svg?branch=master)](https://travis-ci.com/ardyflora/pytweetRogerInternet)
 
+#Code Climate status
+[![Maintainability](https://api.codeclimate.com/v1/badges/678410fc3d768129938a/maintainability)](https://codeclimate.com/github/ardyflora/pytweetRogerInternet/maintainability)
+
 pyTweetRogerInternet is a bot that will periodically check the Internet speed, tweet a detailed message which will contain the Actual vs Expected speed. The tweet will also have Rogers tagged in the message, with some hashtags.
 
 ## Installation

@@ -1,6 +1,7 @@
 # pyTweetRogerInternet
 > Runs Intenet Speedtest, tweets the speed and tags rogers
 
+# Travis CI Build status
 [![Build Status][travis-image]][travis-url]
 
 pyTweetRogerInternet is a bot that will periodically check the Internet speed, tweet a detailed message which will contain the Actual vs Expected speed. The tweet will also have Rogers tagged in the message, with some hashtags.

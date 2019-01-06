@@ -16,6 +16,7 @@ OS X & Linux:
 ```sh
 pip install tweepy
 pip install python-dotenv
+pip install speedtest-cli
 ```
 
 ## Usage example

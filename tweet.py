@@ -35,32 +35,25 @@ def write_into_json_file(download, upload):
     # Write into json file and plot the data
     json_backup = 'internetSpeed.json'
     df_store = pd.DataFrame(columns=["Time", "Download Speed", "Upload Speed"])
-    time_data = str(datetime.datetime.now())
+    time_data = str(datetime.datetime.now().strftime("%Y-%m-%d"))
 
     try:
         df_store = pd.read_json(json_backup)
 
         df_store = df_store.append({
             "Time": time_data,
-            "Download Speed": download.split(':')[1],
-            "Upload Speed": upload.split(':')[1]
-        }, ignore_index=True)
-
-        df_store.to_json(json_backup)
-        print(df_store)
-    except Exception:
-        df_store = df_store.append({
-            "Time": time_data,
-            "Download Speed": download.split(':')[1],
-            "Upload Speed": upload.split(':')[1]
+            "Download Speed": float(download.split(':')[1].split()[0]),
+            "Upload Speed": float(upload.split(':')[1].split()[0])
         }, ignore_index=True)
 
         df_store.to_json(json_backup)
 
         # Plot is not working
-        df_store.plot().bar()
-        plt.savefig('new_speedtest.png')
+        #plt.scatter(df_store['Time'].tolist(), df_store['Download Speed'], df_store['Upload Speed'])
+        #plt.savefig('new_speedtest.png')
 
+    except Exception as e:
+        print("The error msg:", e)
 
 def main():
     api = twitter_authentication()

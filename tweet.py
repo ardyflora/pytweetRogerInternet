@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 
 from dotenv import load_dotenv
 
-import pandas as pd
 import datetime
 import time  # {Added}
 
@@ -50,10 +49,32 @@ def write_into_json_file(download, upload):
 
         # Plot is not working
         #plt.scatter(df_store['Time'].tolist(), df_store['Download Speed'], df_store['Upload Speed'])
-        #plt.savefig('new_speedtest.png')
+        # plt.savefig('new_speedtest.png')
+
+        plt.plot(
+            df_store['Time'].tolist(),
+            df_store['Download Speed'],
+            color='g')
+        plt.plot(
+            df_store['Time'].tolist(),
+            df_store['Upload Speed'],
+            color='orange')
+        plt.xlabel('Date')
+        plt.ylabel('Internet Speed')
+        plt.title('Upload and Download Internet Speed')
+
+        ax = plt.gca()
+
+        # recompute the ax.dataLim
+        ax.relim()
+        # update ax.viewLim using the new dataLim
+        ax.autoscale_view()
+
+        plt.savefig('new_speedtest.png')
 
     except Exception as e:
         print("The error msg:", e)
+
 
 def main():
     api = twitter_authentication()

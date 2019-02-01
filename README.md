@@ -17,6 +17,7 @@ OS X & Linux:
 pip install tweepy
 pip install python-dotenv
 pip install speedtest-cli
+pip install pandas
 ```
 
 ## Usage example

@@ -2,13 +2,23 @@ import tweepy
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
+import plotly.graph_objs as go
+import plotly.plotly as py
+
+from plotly import tools
 
 from dotenv import load_dotenv
 
+import plotly
 import datetime
 import time  # {Added}
 
 load_dotenv()
+
+
+plotly.tools.set_credentials_file(
+    username=os.environ.get('username'),
+    api_key=os.environ.get('plotly_api_key'))
 
 
 def twitter_authentication():
@@ -47,30 +57,32 @@ def write_into_json_file(download, upload):
 
         df_store.to_json(json_backup)
 
-        # Plot is not working
-        #plt.scatter(df_store['Time'].tolist(), df_store['Download Speed'], df_store['Upload Speed'])
-        # plt.savefig('new_speedtest.png')
+        trace_high = go.Scatter(
+            x=df_store.Time,
+            y=df_store['Download Speed'],
+            name="Download Speed",
+            line=dict(color='#17BECF'),
+            opacity=0.8)
+        trace_low = go.Scatter(
+            x=df_store.Time,
+            y=df_store['Upload Speed'],
+            name="Upload Speed",
+            line=dict(color='#7F7F7F'),
+            opacity=0.8)
 
-        plt.plot(
-            df_store['Time'].tolist(),
-            df_store['Download Speed'],
-            color='g')
-        plt.plot(
-            df_store['Time'].tolist(),
-            df_store['Upload Speed'],
-            color='orange')
-        plt.xlabel('Date')
-        plt.ylabel('Internet Speed')
-        plt.title('Upload and Download Internet Speed')
+        data = [trace_high, trace_low]
 
-        ax = plt.gca()
+        fig = tools.make_subplots(rows=1, cols=2)
+        fig.append_trace(trace_high, 1, 1)
+        fig.append_trace(trace_low, 1, 2)
+        fig['layout'].update(
+            height=600,
+            width=800,
+            title='Internet Speed for few months')
+        py.iplot(fig, filename='simple-subplot-with-annotations')
 
-        # recompute the ax.dataLim
-        ax.relim()
-        # update ax.viewLim using the new dataLim
-        ax.autoscale_view()
-
-        plt.savefig('new_speedtest.png')
+        # Save plot as img
+        py.image.save_as({'data': data}, 'scatter_plot', format='png')
 
     except Exception as e:
         print("The error msg:", e)

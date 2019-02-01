@@ -9,6 +9,9 @@
 
 pyTweetRogerInternet is a bot that will periodically check the Internet speed, tweet a detailed message which will contain the Actual vs Expected speed. The tweet will also have Rogers tagged in the message, with some hashtags.
 
+## Screenshot 
+![Internet Speed For months](https://github.com/ardyflora/pytweetRogerInternet/scatter_plot.png)
+
 ## Installation
 
 OS X & Linux:
